@@ -52,4 +52,5 @@ src/main/java/common/
 src/main/java/entity/
 src/main/java/myservlet/
 src/main/java/servlet/
-src/main/java/jsp.jpg
+src/main/java/jsp.jpgsrc/main/java/dao/DBconnection.java
+src/main/webapp/WEB-INF/lib/*.jar
