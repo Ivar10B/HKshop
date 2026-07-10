@@ -1,0 +1,277 @@
+/* ============================================
+   HKShop — Customer Theme
+   Teal & Coral | Modern & Bold
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg-main:       #f5fffe;
+    --bg-card:       #ffffff;
+    --bg-light:      #e8f8f5;
+    --teal:          #00695c;
+    --teal-light:    #00897b;
+    --teal-pale:     #b2dfdb;
+    --coral:         #ff6f61;
+    --coral-light:   #ff8a80;
+    --coral-dark:    #e64a3b;
+    --text-dark:     #1a2e2b;
+    --text-gray:     #607d7b;
+    --white:         #ffffff;
+    --border:        #cce8e4;
+    --shadow:        0 4px 20px rgba(0,105,92,0.12);
+    --shadow-coral:  0 4px 20px rgba(255,111,97,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    color: var(--teal-light);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+h3 { font-size: 1rem; color: var(--text-dark); font-weight: 600; margin-bottom: 10px; }
+p { color: var(--text-gray); margin-bottom: 10px; }
+
+a { color: var(--coral); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+a:hover { color: var(--coral-dark); text-decoration: underline; }
+
+hr { border: none; border-top: 2px solid var(--teal-pale); margin: 20px 0; }
+
+/* ── Navbar ── */
+.navbar {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white !important;
+}
+
+.navbar-links { display: flex; gap: 10px; align-items: center; }
+
+.navbar-links a {
+    color: rgba(255,255,255,0.85) !important;
+    font-size: 0.88rem;
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+}
+
+.navbar-links a:hover {
+    background: white;
+    color: var(--teal) !important;
+    text-decoration: none;
+}
+
+/* ── Page Wrapper ── */
+.page-wrapper { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+
+/* ── Page Hero ── */
+.page-hero {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+}
+.page-hero h1 { color: white; margin-bottom: 5px; }
+.page-hero p { color: rgba(255,255,255,0.85); margin: 0; }
+
+/* ── Login / Register Box ── */
+.login-box, .register-box {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 45px 40px;
+    max-width: 440px;
+    margin: 60px auto;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+/* ── Inputs ── */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select, textarea {
+    background: var(--bg-light);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-dark);
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--teal-light);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,137,123,0.15);
+}
+
+input[type="radio"] { accent-color: var(--teal); margin-right: 6px; }
+
+/* ── Buttons ── */
+input[type="submit"], input[type="button"], button {
+    background: linear-gradient(135deg, var(--coral-dark), var(--coral));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 28px;
+    font-size: 0.95rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s;
+    width: 100%;
+    margin-top: 5px;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
+    background: linear-gradient(135deg, var(--coral), var(--coral-light));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-coral);
+}
+
+td input[type="submit"] {
+    width: auto;
+    padding: 7px 18px;
+    font-size: 0.82rem;
+    margin-top: 0;
+    border-radius: 20px;
+}
+
+td form { margin: 0; }
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: var(--bg-card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+table th {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+table tr:last-child td { border-bottom: none; }
+table tr:hover td { background: var(--bg-light); }
+
+/* Form tables — no extra styling */
+form table { box-shadow: none; border: none; background: transparent; }
+form table th, form table td {
+    background: transparent;
+    color: var(--text-dark);
+    padding: 8px 4px;
+    font-weight: 600;
+    border-bottom: none;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* ── Messages ── */
+p[style*="green"] {
+    background: #e8f5e9;
+    border-left: 4px solid #43a047;
+    color: #2e7d32 !important;
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+p[style*="red"] {
+    background: #fdecea;
+    border-left: 4px solid var(--coral);
+    color: var(--coral-dark) !important;
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* ── Cart Total ── */
+.cart-total {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+    padding: 18px 24px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 15px 0;
+    text-align: right;
+}
+
+/* ── Footer ── */
+.footer {
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 0.82rem;
+    padding: 25px;
+    border-top: 2px solid var(--border);
+    margin-top: 50px;
+}
+
+/* ── Utility ── */
+.text-teal  { color: var(--teal); }
+.text-coral { color: var(--coral); }
+.text-gray  { color: var(--text-gray); }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+.text-center { text-align: center; }

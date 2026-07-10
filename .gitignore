@@ -1,0 +1,55 @@
+# Compiled output
+build/
+*.class
+
+# Eclipse files
+.classpath
+.project
+.settings/
+.metadata/
+
+# Database credentials - NEVER upload
+src/main/java/dao/db.properties
+
+# Maven/Gradle
+target/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Practice files that are NOT part of HKShop
+src/main/webapp/A.jsp
+src/main/webapp/B.jsp
+src/main/webapp/m.jsp
+src/main/webapp/rrr.jsp
+src/main/webapp/newaccount.jsp
+src/main/webapp/javabean.jsp
+src/main/webapp/data.jsp
+src/main/webapp/cookie.jsp
+src/main/webapp/cookie2.jsp
+src/main/webapp/cookie3.jsp
+src/main/webapp/classwork.jsp
+src/main/webapp/Test.jsp
+src/main/webapp/NewFile.jsp
+src/main/webapp/404.jsp
+src/main/webapp/jsp.jpg
+src/main/webapp/Practice/
+src/main/webapp/Labs/
+src/main/webapp/ClassCode/
+src/main/webapp/CC practice chap3/
+src/main/webapp/chap 3 practice/
+src/main/webapp/chapter3/
+src/main/webapp/Chap6/
+src/main/webapp/Student grade manager/
+src/main/webapp/Login.jsp
+src/main/webapp/myservlet/
+src/main/java/com/
+src/main/java/common/
+src/main/java/entity/
+src/main/java/myservlet/
+src/main/java/servlet/
+src/main/java/jsp.jpg

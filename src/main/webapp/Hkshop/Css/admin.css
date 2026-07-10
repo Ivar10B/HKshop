@@ -1,0 +1,468 @@
+@charset "UTF-8";
+/* ============================================
+   HKShop — Admin Theme
+   Dark & Green | Dashboard Style
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;600;700&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg-main:       #0a0f0a;
+    --bg-sidebar:    #0d1a0d;
+    --bg-card:       #111811;
+    --bg-table-head: #162016;
+    --green:         #00c853;
+    --green-light:   #69f0ae;
+    --green-dark:    #007a33;
+    --white:         #e8f5e9;
+    --gray:          #607d6b;
+    --red:           #ff5252;
+    --yellow:        #ffd740;
+    --border:        #1e2e1e;
+    --shadow:        0 4px 20px rgba(0,200,83,0.1);
+}
+
+/* ── Reset & Base ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── Typography ── */
+h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    color: var(--green-light);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--green);
+    margin-bottom: 15px;
+    border-left: 3px solid var(--green);
+    padding-left: 12px;
+}
+
+h3 {
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+p {
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--green-light);
+}
+
+/* ── HR Divider ── */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+/* ── Admin Layout ── */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    width: 220px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    padding: 30px 0;
+    position: fixed;
+    height: 100vh;
+}
+
+.sidebar-logo {
+    font-family: 'Space Mono', monospace;
+    color: var(--green-light);
+    font-size: 1.1rem;
+    padding: 0 20px 25px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.sidebar a:hover {
+    color: var(--green-light);
+    background: rgba(0,200,83,0.05);
+    border-left-color: var(--green);
+}
+
+/* ── Main Content ── */
+.main-content {
+    margin-left: 220px;
+    padding: 30px;
+    flex: 1;
+}
+
+/* ── Top Bar ── */
+.topbar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-title {
+    font-family: 'Space Mono', monospace;
+    color: var(--green);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ── Stats Cards ── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-card .number {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    color: var(--green-light);
+}
+
+.stat-card .label {
+    color: var(--gray);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ── Dashboard Links ── */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 600px;
+}
+
+.dashboard-link {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 25px 20px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white) !important;
+    transition: all 0.2s;
+    display: block;
+}
+
+.dashboard-link:hover {
+    border-color: var(--green);
+    background: rgba(0,200,83,0.05);
+    color: var(--green-light) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+}
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+table th {
+    background: var(--bg-table-head);
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    padding: 13px 16px;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--green-dark);
+}
+
+table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--white);
+    font-size: 0.88rem;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover td {
+    background: rgba(0,200,83,0.03);
+}
+
+/* ── Forms ── */
+.form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+form table th,
+form table td {
+    background: transparent;
+    color: var(--white);
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    border-bottom: none;
+    font-family: 'DM Sans', sans-serif;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    background: #0d150d;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--white);
+    padding: 9px 13px;
+    font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 2px rgba(0,200,83,0.15);
+}
+
+select option {
+    background: #0d150d;
+    color: var(--white);
+}
+
+/* ── Buttons ── */
+input[type="submit"],
+input[type="button"],
+button {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    color: #0a0f0a;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button:hover {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0,200,83,0.3);
+}
+
+/* ── Small buttons in table ── */
+td input[type="submit"] {
+    width: auto;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+}
+
+td form {
+    margin: 0;
+    display: inline;
+}
+
+/* ── Delete button red ── */
+td form input[value="Delete"],
+td form input[value="Cancel Order"] {
+    background: linear-gradient(135deg, #b71c1c, var(--red));
+    color: white;
+}
+
+td form input[value="Delete"]:hover,
+td form input[value="Cancel Order"]:hover {
+    background: linear-gradient(135deg, var(--red), #ff867f);
+}
+
+/* ── Messages ── */
+p[style*="green"] {
+    background: rgba(0,200,83,0.08);
+    border-left: 3px solid var(--green);
+    color: var(--green-light) !important;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+}
+
+p[style*="red"] {
+    background: rgba(255,82,82,0.08);
+    border-left: 3px solid var(--red);
+    color: var(--red) !important;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* ── Badge / Role tags ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-admin {
+    background: rgba(255,215,64,0.15);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+}
+
+.badge-customer {
+    background: rgba(0,200,83,0.1);
+    color: var(--green);
+    border: 1px solid var(--green-dark);
+}
+
+/* ── Page header ── */
+.page-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: var(--gray);
+    font-size: 0.85rem;
+}
+
+/* ── Back link ── */
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--gray) !important;
+    font-size: 0.85rem;
+}
+
+.back-link:hover {
+    color: var(--green) !important;
+}
+
+/* ── Add button ── */
+.btn-add {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--green-dark);
+    color: var(--green) !important;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+}
+
+.btn-add:hover {
+    background: rgba(0,200,83,0.08);
+    border-color: var(--green);
+    color: var(--green-light) !important;
+    text-decoration: none;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: var(--green-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* ── Utility ── */
+.text-green  { color: var(--green); }
+.text-red    { color: var(--red); }
+.text-yellow { color: var(--yellow); }
+.text-gray   { color: var(--gray); }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
