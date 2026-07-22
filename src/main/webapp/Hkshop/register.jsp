@@ -30,9 +30,11 @@
     String error = request.getParameter("error");
     if ("1".equals(error)) { %>
         <p style="color:red;">❌ Passwords do not match. Try again.</p>
-    <% } else if ("2".equals(error)) { %>
-        <p style="color:red;">❌ Registration failed. Try again later.</p>
-    <% } %>
+   <% } else if ("2".equals(error)) { %>
+    <p style="color:red;">❌ Registration failed. Try again later.</p>
+<% } else if ("3".equals(error)) { %>
+    <p style="color:red;">❌ Username already taken. Please choose another one.</p>
+<% } %>
 
     <%-- Form --%>
     <form action="/hamza/registerservlet" method="post">

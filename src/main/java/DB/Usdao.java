@@ -105,7 +105,7 @@ public class Usdao {
             ps.setString(1, uname);
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -133,5 +133,21 @@ public class Usdao {
             e.printStackTrace();
         }
         return null;
+    }
+ // ── CHECK IF USERNAME EXISTS ─────────────────────────────────
+    public boolean usernameExists(String username) {
+        String sql = "SELECT id FROM users WHERE username = ?";
+        try (Connection conn = DBconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, username);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next(); // true if user name already taken
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

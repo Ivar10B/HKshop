@@ -47,6 +47,14 @@ public class registerservlet extends HttpServlet {
 			 response.sendRedirect(request.getContextPath() + "/Hkshop/register.jsp?error=1");
              return ; 
 		}
+		 
+		// Check if username already taken
+		 Usdao dao = new Usdao();
+		 if (dao.usernameExists(username)) {
+		     response.sendRedirect(request.getContextPath() + "/Hkshop/register.jsp?error=3");
+		     return;
+		 }
+		 
 		 	//hash the password
 		 String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 		 // build new object 
@@ -56,8 +64,8 @@ public class registerservlet extends HttpServlet {
 	     u.setEmail(email);
 	     u.setRole("customer"); 
 	     // Save to data base 
-	     Usdao dao = new Usdao();
-	     boolean ok = dao.registenewuser(u);
+	     Usdao dao1 = new Usdao();
+	     boolean ok = dao1.registenewuser(u);
 	     if(ok) {
 	    	 response.sendRedirect(request.getContextPath() + "/Hkshop/login1.jsp?success=1");
 	}else {
