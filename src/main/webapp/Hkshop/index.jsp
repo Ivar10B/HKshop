@@ -146,137 +146,180 @@
 </head>
 <body>
 
-<%-- Session check --%>
-<%
-    User u = (User) session.getAttribute("user");
-    if (u == null || u.getRole().equals("admin")) {
-        response.sendRedirect(request.getContextPath() + "/Hkshop/login1.jsp");
-        return;
-    }
-    Productdao dao = new Productdao();
-    List<products> list = dao.getAll();
-%>
-
-<%-- Navbar --%>
-<div class="navbar">
-    <div class="navbar-left">
-        <img src="/hamza/Hkshop/hkshop.png" class="navbar-logo" alt="HKShop">
-        <span class="navbar-brand">HKShop</span>
+	<%-- Session check --%>
+	<%
+	    User u = (User) session.getAttribute("user");
+	    if (u == null || u.getRole().equals("admin")) {
+	        response.sendRedirect(request.getContextPath() + "/Hkshop/login1.jsp");
+	        return;
+	    }
+	    Productdao dao = new Productdao();
+	    String keyword = request.getParameter("search");
+	    List<products> list;
+	    if (keyword != null && !keyword.trim().isEmpty()) {
+	        list = dao.searchProducts(keyword.trim());
+	    } else {
+	        list = dao.getAll();
+	        keyword = "";
+	    }
+	%>
+	
+	<%-- Navbar --%>
+	<div class="navbar">
+	    <div class="navbar-left">
+	        <img src="/hamza/Hkshop/hkshop.png" class="navbar-logo" alt="HKShop">
+	        <span class="navbar-brand">HKShop</span>
+	    </div>
+	    <div class="navbar-right">
+	        <a href="/hamza/Hkshop/myorders.jsp">📋 My Orders</a>
+	        <a href="/hamza/Cartitemservlet?action=view" class="cart-btn">🛒 Cart</a>
+	        <a href="/hamza/LogoutServlet">Logout</a>
+	    </div>
+	</div>
+	
+	<%-- Banner image --%>
+	<img src="/hamza/Hkshop/hkshop.png" class="banner" alt="HKShop Banner">
+	
+	<%-- Welcome strip --%>
+	<div class="welcome-strip">
+	    <span>👋 Welcome back, <%= u.getUsername() %>!</span>
+	    <span style="color:#607d7b; font-weight:400; font-size:0.85rem;">
+	        <%= list.size() %> products available
+	    </span>
+	</div>
+	
+	<%-- Success message --%>
+	<% String success = request.getParameter("success");
+	   if ("1".equals(success)) { %>
+	    <div style="background:#e0f7f4; border-left:4px solid #00897b;
+	                color:#00695c; padding:12px 30px; font-weight:700;">
+	        ✅ Product added to cart!
+	        <a href="/hamza/Cartitemservlet?action=view"
+	           style="margin-left:10px; color:#ff6f61;">View Cart →</a>
+	    </div>
+	<% } %>
+	
+	<%-- Main Content --%>
+	<div class="main-content">
+	<div class="page-wrapper">
+	
+	    <%-- Search Bar --%>
+	<form action="/hamza/Hkshop/index.jsp" method="get"
+	      style="display:flex; gap:10px; align-items:center; margin-bottom:20px;">
+	    <input type="text"
+	           name="search"
+	           value="<%= keyword %>"
+	           placeholder="🔍 Search products..."
+	           style="padding:10px 16px; border:2px solid #00695c;
+	                  border-radius:25px; font-size:0.9rem;
+	                  width:300px; outline:none; font-family:'Poppins',sans-serif;">
+	    <button type="submit"
+	            style="padding:10px 22px; background:#00695c; color:white;
+	                   border:none; border-radius:25px; cursor:pointer;
+	                   font-size:0.9rem; font-weight:700; font-family:'Poppins',sans-serif;">
+	        Search
+	    </button>
+	    <% if (keyword != null && !keyword.isEmpty()) { %>
+	        <a href="/hamza/Hkshop/index.jsp"
+	           style="color:#ff6f61; font-size:0.88rem; text-decoration:none;
+	                  font-weight:700;">
+	            ✕ Clear
+	        </a>
+	        <span style="color:#607d7b; font-size:0.85rem;">
+	            <%= list.size() %> result(s) for "<%= keyword %>"
+	        </span>
+	    <% } %>
+	</form>
+	<h2 style="margin-bottom:20px;">📦 Our Products</h2>
+		<% if (list.isEmpty()) { %>
+    <div style="text-align:center; padding:60px;
+                color:#607d7b; font-size:1rem;">
+        😕 No products found for "<%= keyword %>".
+        <a href="/hamza/Hkshop/index.jsp"
+           style="color:#00695c; font-weight:700;">
+            Show all products
+        </a>
     </div>
-    <div class="navbar-right">
-        <a href="/hamza/Hkshop/myorders.jsp">📋 My Orders</a>
-        <a href="/hamza/Cartitemservlet?action=view" class="cart-btn">🛒 Cart</a>
-        <a href="/hamza/LogoutServlet">Logout</a>
-    </div>
-</div>
-
-<%-- Banner image --%>
-<img src="/hamza/Hkshop/hkshop.png" class="banner" alt="HKShop Banner">
-
-<%-- Welcome strip --%>
-<div class="welcome-strip">
-    <span>👋 Welcome back, <%= u.getUsername() %>!</span>
-    <span style="color:#607d7b; font-weight:400; font-size:0.85rem;">
-        <%= list.size() %> products available
-    </span>
-</div>
-
-<%-- Success message --%>
-<% String success = request.getParameter("success");
-   if ("1".equals(success)) { %>
-    <div style="background:#e0f7f4; border-left:4px solid #00897b;
-                color:#00695c; padding:12px 30px; font-weight:700;">
-        ✅ Product added to cart!
-        <a href="/hamza/Cartitemservlet?action=view"
-           style="margin-left:10px; color:#ff6f61;">View Cart →</a>
-    </div>
-<% } %>
-
-<%-- Main Content --%>
-<div class="main-content">
-<div class="page-wrapper">
-
-    <h2 style="margin-bottom:20px;">📦 Our Products</h2>
-
-    <table class="product-table">
-        <tr>
-        	<th>Image</th>
-            <th>#</th>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Stock</th>
-            <th>Action</th>
-            
-        </tr>
-        <% for (int i = 0; i < list.size(); i++) {
-               products p = list.get(i); %>
-        <tr>
-        	<td>
-			    <% if (p.getImage() != null && !p.getImage().isEmpty()) { %>
-			        <img src="<%= p.getImage() %>"
-			             style="width:70px; height:70px;
-			                    object-fit:cover;
-			                    border-radius:10px;
-			                    border:2px solid #b2dfdb;
-			                    box-shadow:0 2px 8px rgba(0,105,92,0.15);">
-			    <% } else { %>
-			        <span style="font-size:1.8rem;">📦</span>
-			    <% } %>
-			</td>
-            <td style="color:#607d7b; font-size:0.85rem;">
-                <%= p.getId() %>
-            </td>
-            <td style="font-weight:700; color:#00695c;">
-                <%= p.getName() %>
-            </td>
-            <td style="color:#ff6f61; font-weight:800; font-size:1rem;">
-                $<%= String.format("%.2f", p.getPrice()) %>
-            </td>
-            <td style="color:#607d7b;">
-                <%= p.getDescription() %>
-            </td>
-            <td>
-                <% if (p.getQuantity() > 0) { %>
-                    <span style="background:#e0f7f4; color:#00695c;
-                                 padding:4px 10px; border-radius:20px;
-                                 font-size:0.82rem; font-weight:700;">
-                        <%= p.getQuantity() %> left
-                    </span>
-                <% } else { %>
-                    <span style="background:#fdecea; color:#e64a3b;
-                                 padding:4px 10px; border-radius:20px;
-                                 font-size:0.82rem; font-weight:700;">
-                        Out of stock
-                    </span>
-                <% } %>
-            </td>
-            <td>
-                <% if (p.getQuantity() > 0) { %>
-                <form action="/hamza/Cartitemservlet" method="post">
-                    <input type="hidden" name="productId" value="<%= p.getId() %>">
-                    <input type="submit" value="Add to Cart"
-                           style="width:auto; padding:8px 18px;
-                                  font-size:0.82rem; border-radius:20px;
-                                  margin-top:0;">
-                </form>
-                <% } else { %>
-                    <span style="color:#ccc; font-size:0.85rem;">—</span>
-                <% } %>
-            </td>
-           
-        </tr>
-        <% } %>
-    </table>
-
-</div>
-</div>
-
-<%-- Footer always at bottom --%>
-<div class="footer">
-    © 2026 <span>HKShop</span> — Developed by <span>Hamza Khaldi</span>
-    &nbsp;|&nbsp; All rights reserved
-</div>
-
-</body>
-</html>
+<% } else { %>
+	    <table class="product-table">
+	        <tr>
+	        	<th>Image</th>
+	            <th>#</th>
+	            <th>Product Name</th>
+	            <th>Price</th>
+	            <th>Description</th>
+	            <th>Stock</th>
+	            <th>Action</th>
+	            
+	        </tr>
+	        <% for (int i = 0; i < list.size(); i++) {
+	               products p = list.get(i); %>
+	        <tr>
+	        	<td>
+				    <% if (p.getImage() != null && !p.getImage().isEmpty()) { %>
+				        <img src="<%= p.getImage() %>"
+				             style="width:70px; height:70px;
+				                    object-fit:cover;
+				                    border-radius:10px;
+				                    border:2px solid #b2dfdb;
+				                    box-shadow:0 2px 8px rgba(0,105,92,0.15);">
+				    <% } else { %>
+				        <span style="font-size:1.8rem;">📦</span>
+				    <% } %>
+				</td>
+	            <td style="color:#607d7b; font-size:0.85rem;">
+	                <%= p.getId() %>
+	            </td>
+	            <td style="font-weight:700; color:#00695c;">
+	                <%= p.getName() %>
+	            </td>
+	            <td style="color:#ff6f61; font-weight:800; font-size:1rem;">
+	                $<%= String.format("%.2f", p.getPrice()) %>
+	            </td>
+	            <td style="color:#607d7b;">
+	                <%= p.getDescription() %>
+	            </td>
+	            <td>
+	                <% if (p.getQuantity() > 0) { %>
+	                    <span style="background:#e0f7f4; color:#00695c;
+	                                 padding:4px 10px; border-radius:20px;
+	                                 font-size:0.82rem; font-weight:700;">
+	                        <%= p.getQuantity() %> left
+	                    </span>
+	                <% } else { %>
+	                    <span style="background:#fdecea; color:#e64a3b;
+	                                 padding:4px 10px; border-radius:20px;
+	                                 font-size:0.82rem; font-weight:700;">
+	                        Out of stock
+	                    </span>
+	                <% } %>
+	            </td>
+	            <td>
+	                <% if (p.getQuantity() > 0) { %>
+	                <form action="/hamza/Cartitemservlet" method="post">
+	                    <input type="hidden" name="productId" value="<%= p.getId() %>">
+	                    <input type="submit" value="Add to Cart"
+	                           style="width:auto; padding:8px 18px;
+	                                  font-size:0.82rem; border-radius:20px;
+	                                  margin-top:0;">
+	                </form>
+	                <% } else { %>
+	                    <span style="color:#ccc; font-size:0.85rem;">—</span>
+	                <% } %>
+	            </td>
+	           
+	        </tr>
+	        <% } %>
+	    </table>
+	<% } %>
+	</div>
+	</div>
+	
+	<%-- Footer always at bottom --%>
+	<div class="footer">
+	    © 2026 <span>HKShop</span> — Developed by <span>Hamza Khaldi</span>
+	    &nbsp;|&nbsp; All rights reserved
+	</div>
+	
+	</body>
+	</html>

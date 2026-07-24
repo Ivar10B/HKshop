@@ -80,4 +80,31 @@ public class Productdao {
             e.printStackTrace();
         }
     }
+    // SEARCH PRODUCTS
+    public List<products> searchProducts(String keyword){
+    	 List<products> list = new ArrayList<>();
+    	 String sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
+    	 try(Connection conn = DBconnection.getConnection();	
+    		  PreparedStatement ps = conn.prepareStatement(sql)){
+    		 String term = "%" + keyword + "%";
+    		 ps.setString(1, term);
+    		 ps.setString(2, term);
+    	  try(ResultSet rs = ps.executeQuery()){
+    		  while(rs.next()) {
+    			  products p = new products();
+                  p.setId(rs.getInt("id"));
+                  p.setName(rs.getString("name"));
+                  p.setPrice(rs.getDouble("price"));
+                  p.setDescription(rs.getString("description"));
+                  p.setQuantity(rs.getInt("quantity"));
+                  p.setImage(rs.getString("image"));
+                  list.add(p);
+    		  }
+    	  }
+    	 } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 return list;
+    }
 }
